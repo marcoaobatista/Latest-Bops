@@ -2,8 +2,9 @@ import requests
 import base64
 import json
 from os import environ
-import sys
 from dotenv import load_dotenv
+
+LAST_N_TRACKS = 15
 
 class SpotifyClient():
     def __init__(self, token):
@@ -24,7 +25,7 @@ class SpotifyClient():
         total_tracks = response.json()['total']
 
         # Calculate the offset from the beginning of the list.
-        offset = max(total_tracks - 15, 0)
+        offset = max(total_tracks - LAST_N_TRACKS, 0)
 
         # Get the track at that offset.
         response = requests.get(
@@ -58,20 +59,20 @@ class SpotifyClient():
         print("Successfully added tracks to playlist.")
 
     def delete_tracks_from_playlist(self, playlist_id):
+        url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
         headers = {
             "Authorization": f"Bearer {self.TOKEN}",
             "Content-Type": "application/json"
         }
 
-        response = requests.get(f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks", headers=headers)
+        response = requests.get(url, headers=headers)
         if response.status_code != 200:
             raise Exception("Failed to get playlist tracks: ", response.content)
 
         tracks = response.json()['items']
-        uris = [track['track']['uri'] for track in tracks]
+        uris = [{"uri": track['track']['uri']} for track in tracks]
 
-        url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
-        data = json.dumps({"uris": uris})
+        data = json.dumps({"tracks": uris})
 
         response = requests.delete(url, headers=headers, data=data)
 
