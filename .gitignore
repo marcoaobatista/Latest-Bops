@@ -1,0 +1,15 @@
+# machine-specific configuration files
+.env
+venv/
+
+# Ignore JetBrains IDE directory
+.idea/
+
+# Ignore Git metadata directory
+.git/
+
+# Ignore Pycache directory
+__pycache__/
+
+# Ignore DS Store file
+.DS_Store
