@@ -26,13 +26,13 @@ The script utilizes the following Python libraries:
 
 Before running the script, ensure you have set up the required environment variables in a `.env` file with the following keys:
 
-    ```plaintext
+   ```plaintext
     SPOTIFY_LTBS_CLIENT_ID=your_client_id
     SPOTIFY_LTBS_CLIENT_SECRET=your_client_secret
     SPOTIFY_LTBS_REFRESH_TOKEN=your_refresh_token
     SPOTIFY_LTBS_SOURCE_ID=your_source_id
     SPOTIFY_LTBS_TARGET_ID=your_target_id
-    ```
+   ```
 
 Once the environment variables are set up, you can run the script, and it will handle the rest automatically.
 
