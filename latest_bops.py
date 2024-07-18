@@ -53,7 +53,7 @@ class SpotifyClient():
 
         response = requests.post(url, headers=headers, data=data)
 
-        if response.status_code != 200:
+        if response.status_code != 201:
             raise Exception("Failed to add tracks to playlist: ", response.content)
 
         print("Successfully added tracks to playlist.")
